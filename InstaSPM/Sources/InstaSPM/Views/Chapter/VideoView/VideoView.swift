@@ -4,34 +4,23 @@ import AVKit
 struct VideoView: View {
     private let videoPlayer: AVPlayer?
     @State private var playing = true
-    @GestureState var press = false
+    @Binding private var isLongPressed: Bool
     
-    init(url: String) {
+    init(isLongPressed: Binding<Bool>, url: String) {
         if let url = URL(string: url) {
             self.videoPlayer = AVPlayer(url: url)
         } else {
             self.videoPlayer = nil
         }
+        _isLongPressed = isLongPressed
     }
     
     var body: some View {
         if let videoPlayer {
             ZStack {
                 PlayerViewController(player: videoPlayer)
-                
-                Color.black
-                    .opacity(playing ? 0.0 : 0.2)
             }.ignoresSafeArea(.all)
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { value in
-                        playing = false
-                    }
-                    .onEnded { value in
-                        playing = true
-                    }
-                )
-            .onChange(of: playing) { play in
+            .onChange(of: !isLongPressed) { play in
                 if play {
                     videoPlayer.play()
                 } else {
@@ -46,6 +35,8 @@ struct VideoView: View {
 
 struct VideoView_Previews: PreviewProvider {
     static var previews: some View {
-        VideoView(url: "https://dev.whost.ml/mixkit-pink-and-blue-ink-1192-medium.mp4")
+        VideoView(
+            isLongPressed: .constant(false),
+            url: "https://dev.whost.ml/mixkit-pink-and-blue-ink-1192-medium.mp4")
     }
 }

@@ -5,11 +5,12 @@ public struct InstaStoryPage: View {
     
     @State private var isLoading = false
     @ObservedObject private var viewModel = InstaStoryPageViewModel()
+    @State private var isLongPressed = false
     
     public var body: some View {
         ZStack(alignment: .top) {
             if let chapter = viewModel.getCurrentChapter() {
-                ChapterView(chapter: chapter)
+                ChapterView(isLongPressed: $isLongPressed, chapter: chapter)
             }
 
             StoryBarView(chapters: viewModel.chapters)
@@ -29,6 +30,17 @@ public struct InstaStoryPage: View {
                         viewModel.getNextChapter()
                     }
             }
+            .gesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { value in
+                    isLongPressed = true
+                    print("LongPressGesture tap")
+                }
+                .onEnded { value in
+                    isLongPressed = false
+                    print("LongPressGesture release")
+                }
+            )
         }
         .onAppear {
             fetchData(NetworkURLs.list10Pics)
