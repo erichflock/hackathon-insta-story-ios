@@ -5,7 +5,15 @@ struct StoryView: View {
     var story: Story
     
     var body: some View {
-        AsyncImage(url: URL(string: story.url))
+        if isImage {
+            AsyncImage(url: URL(string: story.url))
+        } else {
+            VideoView()
+        }
+    }
+    
+    var isImage: Bool {
+        return false
     }
 }
 
