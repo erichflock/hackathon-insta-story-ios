@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37F77A7E2A0E64FF00F8BDF9 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F77A7D2A0E64FF00F8BDF9 /* VideoView.swift */; };
+		37F77A802A0E653400F8BDF9 /* VideoViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F77A7F2A0E653400F8BDF9 /* VideoViewViewModel.swift */; };
 		64E8C2802A0E41D0007B487E /* Hackathon23_InstaStoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E8C27F2A0E41D0007B487E /* Hackathon23_InstaStoryApp.swift */; };
 		64E8C2822A0E41D0007B487E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E8C2812A0E41D0007B487E /* ContentView.swift */; };
 		64E8C2842A0E41D2007B487E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64E8C2832A0E41D2007B487E /* Assets.xcassets */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37F77A7D2A0E64FF00F8BDF9 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		37F77A7F2A0E653400F8BDF9 /* VideoViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewViewModel.swift; sourceTree = "<group>"; };
 		64E8C27C2A0E41D0007B487E /* Hackathon23_InstaStory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hackathon23_InstaStory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64E8C27F2A0E41D0007B487E /* Hackathon23_InstaStoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hackathon23_InstaStoryApp.swift; sourceTree = "<group>"; };
 		64E8C2812A0E41D0007B487E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 				64E8C2812A0E41D0007B487E /* ContentView.swift */,
 				64E8C2832A0E41D2007B487E /* Assets.xcassets */,
 				64E8C2852A0E41D2007B487E /* Preview Content */,
+				37F77A7D2A0E64FF00F8BDF9 /* VideoView.swift */,
+				37F77A7F2A0E653400F8BDF9 /* VideoViewViewModel.swift */,
 			);
 			path = Hackathon23_InstaStory;
 			sourceTree = "<group>";
@@ -152,6 +158,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37F77A7E2A0E64FF00F8BDF9 /* VideoView.swift in Sources */,
+				37F77A802A0E653400F8BDF9 /* VideoViewViewModel.swift in Sources */,
 				64E8C2822A0E41D0007B487E /* ContentView.swift in Sources */,
 				64E8C2802A0E41D0007B487E /* Hackathon23_InstaStoryApp.swift in Sources */,
 			);
