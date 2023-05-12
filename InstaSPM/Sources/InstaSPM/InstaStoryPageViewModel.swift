@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Erich Flock on 12.05.23.
-//
-
 import SwiftUI
 
 class InstaStoryPageViewModel: ObservableObject {
@@ -28,6 +21,4 @@ class InstaStoryPageViewModel: ObservableObject {
             }
         }
     }
-
-    
 }
