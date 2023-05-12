@@ -17,7 +17,7 @@ enum MediaType: String, Decodable {
     case soundPic = "SOUND_PIC"
 }
 
-struct Chapter: Decodable {
+struct Chapter: Decodable, Identifiable {
     let id: Int // 125
     let url: String // "https://wallpapers.com/images/featured-full/mobile-58g8gv3r23zg29kw.jpg",
     let length: Int // 50,

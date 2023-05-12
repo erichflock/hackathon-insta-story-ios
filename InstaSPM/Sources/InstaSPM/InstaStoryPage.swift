@@ -7,10 +7,13 @@ public struct InstaStoryPage: View {
     @ObservedObject private var viewModel = InstaStoryPageViewModel()
     
     public var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             if let chapter = viewModel.getCurrentChapter() {
                 ChapterView(chapter: chapter)
             }
+
+            StoryBarView(chapters: viewModel.chapters)
+            
             HStack(spacing: 0) {
                 // It's there but not
                 Rectangle().fill(Color.black)
