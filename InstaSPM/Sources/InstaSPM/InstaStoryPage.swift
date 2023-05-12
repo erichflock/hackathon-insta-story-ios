@@ -1,14 +1,35 @@
 import SwiftUI
 
 public struct InstaStoryPage: View {
+    public init() {}
+    
+    @State private var isLoading = false
+    @ObservedObject private var viewModel = InstaStoryPageViewModel()
+    
     public var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ZStack {
+            if let story = viewModel.getNextNewStory() {
+                StoryView(story: story)
+                    .onTapGesture {
+                        viewModel.setStoryAsSeen(seenStory: story)
+                    }
+            }
         }
-        .padding()
+        .onAppear {
+            fetchData(NetworkURLs.list10Pics)
+        }
+    }
+    
+    func fetchData(_ urlString: String) {
+        isLoading = true
+        Task {
+            do {
+                viewModel.stories = try await Network.fetchStories(urlString)
+            } catch {
+                print("Error: \(error)")
+            }
+            isLoading = false
+        }
     }
 }
 

@@ -5,7 +5,7 @@ import InstaSPM
 struct Hackathon23_InstaStoryApp: App {
     var body: some Scene {
         WindowGroup {
-            VideoView()
+            InstaStoryPage()
         }
     }
 }

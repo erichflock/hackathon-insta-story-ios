@@ -10,7 +10,6 @@
 		37F77A7E2A0E64FF00F8BDF9 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F77A7D2A0E64FF00F8BDF9 /* VideoView.swift */; };
 		37F77A802A0E653400F8BDF9 /* VideoViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F77A7F2A0E653400F8BDF9 /* VideoViewViewModel.swift */; };
 		64E8C2802A0E41D0007B487E /* Hackathon23_InstaStoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E8C27F2A0E41D0007B487E /* Hackathon23_InstaStoryApp.swift */; };
-		64E8C2822A0E41D0007B487E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E8C2812A0E41D0007B487E /* ContentView.swift */; };
 		64E8C2842A0E41D2007B487E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64E8C2832A0E41D2007B487E /* Assets.xcassets */; };
 		64E8C2872A0E41D2007B487E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64E8C2862A0E41D2007B487E /* Preview Assets.xcassets */; };
 		64E8C2902A0E43C5007B487E /* InstaSPM in Frameworks */ = {isa = PBXBuildFile; productRef = 64E8C28F2A0E43C5007B487E /* InstaSPM */; };
@@ -21,7 +20,6 @@
 		37F77A7F2A0E653400F8BDF9 /* VideoViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewViewModel.swift; sourceTree = "<group>"; };
 		64E8C27C2A0E41D0007B487E /* Hackathon23_InstaStory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hackathon23_InstaStory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64E8C27F2A0E41D0007B487E /* Hackathon23_InstaStoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hackathon23_InstaStoryApp.swift; sourceTree = "<group>"; };
-		64E8C2812A0E41D0007B487E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		64E8C2832A0E41D2007B487E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64E8C2862A0E41D2007B487E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		64E8C28D2A0E41F8007B487E /* InstaSPM */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = InstaSPM; path = ../../InstaSPM; sourceTree = "<group>"; };
@@ -61,7 +59,6 @@
 			children = (
 				64E8C28D2A0E41F8007B487E /* InstaSPM */,
 				64E8C27F2A0E41D0007B487E /* Hackathon23_InstaStoryApp.swift */,
-				64E8C2812A0E41D0007B487E /* ContentView.swift */,
 				64E8C2832A0E41D2007B487E /* Assets.xcassets */,
 				64E8C2852A0E41D2007B487E /* Preview Content */,
 				37F77A7D2A0E64FF00F8BDF9 /* VideoView.swift */,
