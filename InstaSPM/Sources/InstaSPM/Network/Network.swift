@@ -18,7 +18,7 @@ struct Story: Decodable {
     let length: Int // 50,
     let posted: Int // 1683885376,
 //          let banners: [],
-    let status: String // "SEEN"
+    var status: String // "SEEN"
 }
 
 class Network {

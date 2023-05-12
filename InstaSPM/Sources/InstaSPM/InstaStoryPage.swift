@@ -1,19 +1,19 @@
 import SwiftUI
 
 public struct InstaStoryPage: View {
-    public init() {
-    }
+    public init() {}
+    
     @State private var isLoading = false
-    @State private var stories: [Story]?
+    @ObservedObject private var viewModel = InstaStoryPageViewModel()
     
     public var body: some View {
         ZStack {
-            if let story = stories?.first {
+            if let story = viewModel.getNextNewStory() {
                 StoryView(story: story)
             }
         }
         .onAppear {
-            fetchData(NetworkURLs.list2Pics)
+            fetchData(NetworkURLs.list10Pics)
         }
     }
     
@@ -21,7 +21,7 @@ public struct InstaStoryPage: View {
         isLoading = true
         Task {
             do {
-                stories = try await Network.fetchStories(urlString)
+                viewModel.stories = try await Network.fetchStories(urlString)
             } catch {
                 print("Error: \(error)")
             }
