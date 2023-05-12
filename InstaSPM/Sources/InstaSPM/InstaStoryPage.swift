@@ -13,6 +13,7 @@ public struct InstaStoryPage: View {
             }
 
             StoryBarView(chapters: viewModel.chapters)
+                .frame(width: UIScreen.main.bounds.width)
             
             HStack(spacing: 0) {
                 // It's there but not
