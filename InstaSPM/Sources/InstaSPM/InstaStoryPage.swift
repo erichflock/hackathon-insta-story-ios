@@ -8,10 +8,10 @@ public struct InstaStoryPage: View {
     
     public var body: some View {
         ZStack {
-            if let story = viewModel.getNextNewStory() {
-                StoryView(story: story)
+            if let chapter = viewModel.getCurrentChapter() {
+                ChapterView(chapter: chapter)
                     .onTapGesture {
-                        viewModel.setStoryAsSeen(seenStory: story)
+//                        viewModel.setStoryAsSeen(seenStory: story)
                     }
             }
         }
@@ -24,7 +24,8 @@ public struct InstaStoryPage: View {
         isLoading = true
         Task {
             do {
-                viewModel.stories = try await Network.fetchStories(urlString)
+                let stories = try await Network.fetchStories(urlString)
+                viewModel.chapters = stories[0].chapters
             } catch {
                 print("Error: \(error)")
             }
