@@ -8,6 +8,7 @@ struct ChapterView: View {
         switch chapter.type {
             case .image:
                 AsyncImage(url: URL(string: chapter.url))
+                .frame(height: .zero)
             case .video:
                 VideoView(url: chapter.url)
             case .soundPic:
