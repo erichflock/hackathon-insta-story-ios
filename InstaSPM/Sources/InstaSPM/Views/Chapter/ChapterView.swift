@@ -15,6 +15,7 @@ struct ChapterView: View {
             switch chapter.type {
                 case .image:
                     AsyncImage(url: URL(string: chapter.url))
+                        .frame(height: .zero)
                 case .video:
                     VideoView(isLongPressed: $isLongPressed, url: chapter.url)
                 case .soundPic:
