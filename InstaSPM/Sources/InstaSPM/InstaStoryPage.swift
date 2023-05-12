@@ -10,6 +10,9 @@ public struct InstaStoryPage: View {
         ZStack {
             if let story = viewModel.getNextNewStory() {
                 StoryView(story: story)
+                    .onTapGesture {
+                        viewModel.setStoryAsSeen(seenStory: story)
+                    }
             }
         }
         .onAppear {
