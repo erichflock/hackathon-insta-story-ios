@@ -11,6 +11,12 @@ struct Story: Decodable {
     let id: Int
 }
 
+enum MediaType: String, Decodable {
+    case image = "IMAGE"
+    case video = "VIDEO"
+    case soundPic = "SOUND_PIC"
+}
+
 struct Chapter: Decodable {
     let id: Int // 125
     let url: String // "https://wallpapers.com/images/featured-full/mobile-58g8gv3r23zg29kw.jpg",
@@ -20,5 +26,5 @@ struct Chapter: Decodable {
     let status: String // "SEEN"
     let startAt: Int?
     let endAt: Int?
-    let type: String
+    let type: MediaType
 }

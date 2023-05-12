@@ -5,15 +5,14 @@ struct ChapterView: View {
     var chapter: Chapter
     
     var body: some View {
-        if isImage {
-            AsyncImage(url: URL(string: chapter.url))
-        } else {
-            VideoView()
+        switch chapter.type {
+            case .image:
+                AsyncImage(url: URL(string: chapter.url))
+            case .video:
+                VideoView()
+            case .soundPic:
+                Text("What the hell!?")
         }
-    }
-    
-    var isImage: Bool {
-        return true
     }
 }
 
@@ -26,6 +25,6 @@ struct SwiftUIView_Previews: PreviewProvider {
                                    status: "",
                                    startAt: 0,
                                    endAt: 0,
-                                   type: ""))
+                                   type: .image))
     }
 }

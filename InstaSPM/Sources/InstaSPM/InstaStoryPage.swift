@@ -10,8 +10,20 @@ public struct InstaStoryPage: View {
         ZStack {
             if let chapter = viewModel.getCurrentChapter() {
                 ChapterView(chapter: chapter)
+            }
+            HStack(spacing: 0) {
+                // It's there but not
+                Rectangle().fill(Color.black)
+                    .background(Color.black)
+                    .opacity(0.0000000001)
                     .onTapGesture {
-//                        viewModel.setStoryAsSeen(seenStory: story)
+                        viewModel.getPreviousChapter()
+                    }
+                Rectangle().fill(Color.black)
+                    .background(Color.black)
+                    .opacity(0.0000000001)
+                    .onTapGesture {
+                        viewModel.getNextChapter()
                     }
             }
         }

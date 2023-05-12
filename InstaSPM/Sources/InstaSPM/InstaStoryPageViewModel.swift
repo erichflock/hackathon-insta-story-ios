@@ -3,16 +3,18 @@ import SwiftUI
 class InstaStoryPageViewModel: ObservableObject {
     
     @Published var chapters: [Chapter] = []
-    private var currentChapterIndex: Int = 0
+    @Published var currentChapterIndex: Int = 0
     
+    @discardableResult
     func getNextChapter() -> Chapter? {
-        guard currentChapterIndex != chapters.count else {
+        guard currentChapterIndex < chapters.count-1 else {
             return nil
         }
         currentChapterIndex += 1
         return getChapterAtIndex(index: currentChapterIndex)
     }
     
+    @discardableResult
     func getPreviousChapter() -> Chapter? {
         guard currentChapterIndex != 0 else {
             return nil
