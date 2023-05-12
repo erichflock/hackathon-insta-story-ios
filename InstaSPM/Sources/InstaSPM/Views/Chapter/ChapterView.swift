@@ -9,7 +9,7 @@ struct ChapterView: View {
             case .image:
                 AsyncImage(url: URL(string: chapter.url))
             case .video:
-                VideoView()
+                VideoView(url: chapter.url)
             case .soundPic:
                 Text("What the hell!?")
         }

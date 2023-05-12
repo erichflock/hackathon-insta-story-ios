@@ -37,7 +37,7 @@ public struct InstaStoryPage: View {
         Task {
             do {
                 let stories = try await Network.fetchStories(urlString)
-                viewModel.chapters = stories[0].chapters
+                viewModel.chapters = stories[1].chapters
             } catch {
                 print("Error: \(error)")
             }
