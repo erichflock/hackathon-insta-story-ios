@@ -7,55 +7,14 @@ public struct InstaStoryPage: View {
     @State private var stories: [Story]?
     
     public var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-            if isLoading {
-                ProgressView()
-            } else {
-                Button(action: {
-                    fetchData(NetworkURLs.list2Pics)
-                }, label: {
-                    Text("Fetch 2 Pics")
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                })
-                .padding()
-            }
-            if isLoading {
-                ProgressView()
-            } else {
-                Button(action: {
-                    fetchData(NetworkURLs.list10Pics)
-                }, label: {
-                    Text("Fetch 10 Pics")
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                })
-                .padding()
-            }
-            if isLoading {
-                ProgressView()
-            } else {
-                Button(action: {
-                    fetchData(NetworkURLs.listVideos)
-                }, label: {
-                    Text("Fetch Videos")
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                })
-                .padding()
+        ZStack {
+            if let story = stories?.first {
+                StoryView(story: story)
             }
         }
-        .padding()
+        .onAppear {
+            fetchData(NetworkURLs.list2Pics)
+        }
     }
     
     func fetchData(_ urlString: String) {
