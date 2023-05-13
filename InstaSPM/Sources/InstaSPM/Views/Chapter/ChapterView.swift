@@ -40,7 +40,8 @@ struct ChapterView: View {
             }
             
             StoryBarView(numberOfChapters: numberOfChapters,
-                         currentIndex: index)
+                         currentIndex: index,
+                         length: chapter.length)
                 .frame(width: UIScreen.main.bounds.width)
             
             Color.black

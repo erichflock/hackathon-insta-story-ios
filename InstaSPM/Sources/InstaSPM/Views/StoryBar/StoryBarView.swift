@@ -5,9 +5,10 @@ struct StoryBarView: View {
     
     var numberOfChapters: Int
     var currentIndex: Int
+    var length: Int
     
     @State private var progress = 0.0
-    let timer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         HStack(alignment: .center, spacing: 4) {
@@ -17,20 +18,23 @@ struct StoryBarView: View {
                     .frame(width: nil, height: 2, alignment: .leading)
                     .animation(.linear)
                     .onReceive(timer) { _ in
-                        updateProgess()
+                        updateProgress()
                     }
             }
         }.padding()
     }
     
-    func updateProgess() {
-        guard progress < 1 else { return }
-        progress += 0.2
+    func updateProgress() {
+        let timerFactor = 0.1
+        let lenghtInSec = Double(length) / 1000
+        let timesToUpdate = lenghtInSec / timerFactor
+        let updateFactor = 1 / timesToUpdate
+        progress += updateFactor
     }
 }
 
 struct StoryBarView_Previews: PreviewProvider {
     static var previews: some View {
-        StoryBarView(numberOfChapters: 0, currentIndex: 0)
+        StoryBarView(numberOfChapters: 0, currentIndex: 0, length: 0)
     }
 }

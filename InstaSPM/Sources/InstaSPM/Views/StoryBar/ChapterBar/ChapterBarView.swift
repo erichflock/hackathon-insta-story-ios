@@ -12,11 +12,15 @@ struct ChapterBarView: View {
                     .cornerRadius(5)
 
                 Rectangle()
-                    .frame(width: geometry.size.width * self.progress, height: nil, alignment: .leading)
+                    .frame(width: geometry.size.width * calculateWidthFactor(), height: nil, alignment: .leading)
                     .foregroundColor(Color.white.opacity(0.9))
                     .cornerRadius(5)
             }
         }
+    }
+    
+    func calculateWidthFactor() -> CGFloat {
+        progress > 1 ? 1 : progress
     }
 }
 
