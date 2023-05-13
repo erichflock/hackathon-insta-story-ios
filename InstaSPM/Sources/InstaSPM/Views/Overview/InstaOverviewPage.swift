@@ -4,6 +4,7 @@ public struct InstaOverviewPage: View {
     @ObservedObject private var viewModel: InstaOverviewPageViewModel = InstaOverviewPageViewModel()
     @State private var showChapter: Bool = false
     @State private var currentStory: Int = 0
+    @State private var isLoading: Bool = false
     
     public init() {
     }
@@ -43,41 +44,51 @@ public struct InstaOverviewPage: View {
             }
         }.onAppear {
             if viewModel.stories.isEmpty {
-                fetchData(NetworkURLs.list10Pics)
+                Task {
+                    await fetchData(NetworkURLs.list10Pics)
+                }
+                
             }
         }
     }
     
     private var overview: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: .zero) {
-                ForEach(viewModel.stories, id: \.id) { story in
-                    VStack(alignment: .center, spacing: 4) {
-                        RemoteImageView(
-                            withURL: URL(string: story.preview),
-                            placeholder: false
-                        ){ image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                        }.frame(width: 150, height: 150)
-                            .background(.black)
-                        .clipShape(Circle())
-                            .padding(4)
-                            .overlay(
-                                 Circle()
-                                     .stroke(viewModel.getIsStorySeen(story: story) ? .black : .red, lineWidth: 4)
-                            )
-                        
-                        Text(story.title)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(2)
-                    }.frame(width: 158)
-                    .padding(8)
-                    .onTapGesture {
-                        currentStory = story.id
-                        withAnimation {
-                            showChapter = true
+        VStack {
+            if viewModel.stories.isEmpty {
+                Text(isLoading ? "Loading..." : "Something went wrong :(")
+                    .font(.largeTitle)
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: .zero) {
+                        ForEach(viewModel.stories, id: \.id) { story in
+                            VStack(alignment: .center, spacing: 4) {
+                                RemoteImageView(
+                                    withURL: URL(string: story.preview),
+                                    placeholder: false
+                                ){ image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                }.frame(width: 150, height: 150)
+                                    .background(.black)
+                                .clipShape(Circle())
+                                    .padding(4)
+                                    .overlay(
+                                         Circle()
+                                             .stroke(viewModel.getIsStorySeen(story: story) ? .black : .red, lineWidth: 4)
+                                    )
+                                
+                                Text(story.title)
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(2)
+                            }.frame(width: 158)
+                            .padding(8)
+                            .onTapGesture {
+                                currentStory = story.id
+                                withAnimation {
+                                    showChapter = true
+                                }
+                            }
                         }
                     }
                 }
@@ -85,15 +96,20 @@ public struct InstaOverviewPage: View {
         }
     }
     
-    func fetchData(_ urlString: String) {
-        Task {
+    func fetchData(_ urlString: String) async {
             do {
+                isLoading = true
                 let stories = try await Network.fetchStories(urlString)
-                viewModel.stories = stories
+                
+                if !stories.isEmpty {
+                    await viewModel.setStoriesAndLoadFirstChapters(stories: stories)
+                }
+                
+                isLoading = false
             } catch {
                 print("Error: \(error)")
+                isLoading = false
             }
-        }
     }
 }
 
