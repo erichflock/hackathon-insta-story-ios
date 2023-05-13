@@ -18,17 +18,20 @@ struct ChapterView: View {
         ZStack(alignment: .top) {
             switch chapter.type {
                 case .image:
-                    AsyncImage(url: URL(string: chapter.url)) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .clipped()
-                            .ignoresSafeArea(.all)
-                    } placeholder: {
-                            Text("Loading...")
-                                .font(.largeTitle)
-                                .foregroundColor(.white)
-                    }
+                    RemoteImageView(
+                        withURL: URL(string: chapter.url),
+                        placeholder: .image(Image(systemName: "star"))
+                    ){ image, isPlaceholder in
+                        if isPlaceholder {
+                            Color.black
+                        } else {
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .clipped()
+                                
+                        }
+                    }.ignoresSafeArea(.all)
                        
                 case .video:
                     VideoView(isLongPressed: $isLongPressed, url: chapter.url)
