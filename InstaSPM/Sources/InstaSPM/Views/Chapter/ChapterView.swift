@@ -22,7 +22,9 @@ struct ChapterView: View {
                     Text("What the hell!?")
             }
             Color.black
-                .opacity(!isLongPressed ? 0.0 : 0.2)
+                .opacity(!isLongPressed ? 0.0 : 0.1)
+                .ignoresSafeArea()
+            
         }
     }
 }
