@@ -30,17 +30,15 @@ struct InstaStoryPage: View {
                         viewModel.getNextChapter()
                     }
             }
-            .gesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { value in
-                    isLongPressed = true
-                    print("LongPressGesture tap")
-                }
-                .onEnded { value in
-                    isLongPressed = false
-                    print("LongPressGesture release")
-                }
-            )
+//            .gesture(
+//            DragGesture(minimumDistance: 0)
+//                .onChanged { value in
+//                    isLongPressed = true
+//                }
+//                .onEnded { value in
+//                    isLongPressed = false
+//                }
+//            )
         }
     }
 }

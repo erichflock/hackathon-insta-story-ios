@@ -45,7 +45,7 @@ struct ChapterView: View {
                 .frame(width: UIScreen.main.bounds.width)
             
             Color.black
-                .opacity(!isLongPressed ? 0.0 : 0.2)
+                .opacity(!isLongPressed ? 0.0 : 0.1)
         }.background(.black)
             .onAppear { storyTimer.start() }
     }

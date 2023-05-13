@@ -3,7 +3,6 @@ import AVKit
 
 struct VideoView: View {
     private let videoPlayer: AVPlayer?
-    @State private var playing = true
     @Binding private var isLongPressed: Bool
     
     init(isLongPressed: Binding<Bool>, url: String) {
@@ -13,12 +12,16 @@ struct VideoView: View {
             self.videoPlayer = nil
         }
         _isLongPressed = isLongPressed
+        
+        videoPlayer?.automaticallyWaitsToMinimizeStalling = false
+        
     }
     
     var body: some View {
         if let videoPlayer {
             ZStack {
                 PlayerViewController(player: videoPlayer)
+                    .allowsHitTesting(false)
             }.ignoresSafeArea(.all)
             .onChange(of: !isLongPressed) { play in
                 if play {
