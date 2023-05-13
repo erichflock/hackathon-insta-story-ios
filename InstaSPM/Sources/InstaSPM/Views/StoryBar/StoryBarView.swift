@@ -1,10 +1,3 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by Erich Flock on 12.05.23.
-//
-
 import SwiftUI
 import Combine
 
