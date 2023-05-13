@@ -14,8 +14,18 @@ struct ChapterView: View {
         ZStack {
             switch chapter.type {
                 case .image:
-                    AsyncImage(url: URL(string: chapter.url))
-                        .frame(height: .zero)
+                    AsyncImage(url: URL(string: chapter.url)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .clipped()
+                            .ignoresSafeArea(.all)
+                    } placeholder: {
+                            Text("Loading...")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                    }
+                       
                 case .video:
                     VideoView(isLongPressed: $isLongPressed, url: chapter.url)
                 case .soundPic:
@@ -23,7 +33,7 @@ struct ChapterView: View {
             }
             Color.black
                 .opacity(!isLongPressed ? 0.0 : 0.2)
-        }
+        }.background(.black)
     }
 }
 

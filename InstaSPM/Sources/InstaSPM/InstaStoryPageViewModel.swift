@@ -5,6 +5,11 @@ class InstaStoryPageViewModel: ObservableObject {
     @Published var chapters: [Chapter] = []
     @Published var currentChapterIndex: Int = 0
     
+    init(chapters: [Chapter] = [], currentChapterIndex: Int = 0) {
+        self.chapters = chapters
+        self.currentChapterIndex = currentChapterIndex
+    }
+    
     @discardableResult
     func getNextChapter() -> Chapter? {
         guard currentChapterIndex < chapters.count-1 else {
