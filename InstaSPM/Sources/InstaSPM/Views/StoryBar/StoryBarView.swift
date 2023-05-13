@@ -5,56 +5,32 @@ struct StoryBarView: View {
     
     var numberOfChapters: Int
     var currentIndex: Int
-    @State var storyTimer: StoryTimer
+    
+    @State private var progress = 0.0
+    let timer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
     
     var body: some View {
         HStack(alignment: .center, spacing: 4) {
             ForEach(0..<numberOfChapters) { index in
-                //ChapterBarView(progress: min(max((CGFloat(self.storyTimer.progress) - CGFloat(index)), 0.0), 1.0))
-                ChapterBarView(progress: index == currentIndex ? 1 : 0)
+                let progress: CGFloat = index < currentIndex ? 1 : index == currentIndex ? progress : 0
+                ChapterBarView(progress: progress)
                     .frame(width: nil, height: 2, alignment: .leading)
                     .animation(.linear)
+                    .onReceive(timer) { _ in
+                        updateProgess()
+                    }
             }
         }.padding()
+    }
+    
+    func updateProgess() {
+        guard progress < 1 else { return }
+        progress += 0.2
     }
 }
 
 struct StoryBarView_Previews: PreviewProvider {
     static var previews: some View {
-        StoryBarView(numberOfChapters: 0, currentIndex: 0, storyTimer: .init(items: 0, interval: 0))
-    }
-}
-
-class StoryTimer: ObservableObject {
-    
-    @Published var progress: Double
-    private var interval: TimeInterval
-    private var max: Int
-    private let publisher: Timer.TimerPublisher
-    private var cancellable: Cancellable?
-    
-    
-    init(items: Int, interval: TimeInterval) {
-        self.max = items
-        self.progress = 0
-        self.interval = interval
-        self.publisher = Timer.publish(every: 0.1, on: .main, in: .default)
-    }
-    
-    func start() {
-        self.cancellable = self.publisher.autoconnect().sink(receiveValue: {  _ in
-            var newProgress = self.progress + (0.1 / self.interval)
-            if Int(newProgress) >= self.max { newProgress = 0 }
-            self.progress = newProgress
-        })
-    }
-    
-    func cancel() {
-        cancellable?.cancel()
-    }
-    
-    func advance(by number: Int) {
-        let newProgress = Swift.max((Int(self.progress) + number) % self.max , 0)
-        self.progress = Double(newProgress)
+        StoryBarView(numberOfChapters: 0, currentIndex: 0)
     }
 }
