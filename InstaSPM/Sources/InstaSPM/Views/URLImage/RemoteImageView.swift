@@ -29,14 +29,19 @@ public struct RemoteImageView: View {
     }
     
     public var body: some View {
-        VStack {
-            if let image = imageLoader.image, false {
+        VStack(alignment: .center) {
+            if let image = imageLoader.image {
                 AnyView(imageTransformation(Image(uiImage: image)))
             } else if placeholder {
+                Spacer()
                 Text("Loading...")
                     .font(.largeTitle)
                     .foregroundColor(.white)
+                    .scaledToFit()
+                    .minimumScaleFactor(0.5)
+                    .padding(8)
+                Spacer()
             }
-        }.background(.blue)
+        }.background(.black)
     }
 }

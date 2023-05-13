@@ -26,9 +26,8 @@ struct ChapterView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .clipped()
-//                            .ignoresSafeArea(.all)
+                            .ignoresSafeArea(.all)
                     }.background(.black)
-                       
                 case .video:
                     VideoView(isLongPressed: $isLongPressed, url: chapter.url)
                 case .soundPic:

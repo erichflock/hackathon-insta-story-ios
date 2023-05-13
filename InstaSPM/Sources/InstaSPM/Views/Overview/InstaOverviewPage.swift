@@ -55,7 +55,7 @@ public struct InstaOverviewPage: View {
                     VStack(alignment: .center, spacing: 4) {
                         RemoteImageView(
                             withURL: URL(string: story.preview),
-                            placeholder: true
+                            placeholder: false
                         ){ image in
                             image
                                 .resizable()
