@@ -4,6 +4,7 @@ class InstaStoryPageViewModel: ObservableObject {
     
     @Published var chapters: [Chapter] = []
     @Published var currentChapterIndex: Int = 0
+    private let imageLoader = RemoteImageLoader()
     
     init(chapters: [Chapter] = [], currentChapterIndex: Int = 0) {
         self.chapters = chapters
@@ -29,7 +30,15 @@ class InstaStoryPageViewModel: ObservableObject {
     }
     
     func getCurrentChapter() -> Chapter? {
-        getChapterAtIndex(index: currentChapterIndex)
+        let chapter = getChapterAtIndex(index: currentChapterIndex)
+        
+        Task {
+            if let nextChapter = getChapterAtIndex(index: currentChapterIndex + 1) {
+                _ = try? await imageLoader.loadAndCacheImageAsync(urlString: nextChapter.url)
+            }
+        }
+        
+        return chapter
     }
     
     func getChapterAtIndex(index: Int) -> Chapter? {

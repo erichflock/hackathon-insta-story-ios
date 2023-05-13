@@ -2,13 +2,13 @@ import SwiftUI
 
 public struct RemoteImageView: View {
     @ObservedObject private var imageLoader = RemoteImageLoader()
-    private let placeholder: WrappedImage?
-    private let imageTransformation: (Image, Bool) -> any View
+    private let placeholder: Bool
+    private let imageTransformation: (Image) -> any View
     
     public init(
         withPath path: String?,
-        placeholder: WrappedImage? = nil,
-        @ViewBuilder imageTransformation: @escaping (Image, Bool) -> any View
+        placeholder: Bool = false,
+        @ViewBuilder imageTransformation: @escaping (Image) -> any View
     ) {
         self.placeholder = placeholder
         self.imageTransformation = imageTransformation
@@ -17,21 +17,9 @@ public struct RemoteImageView: View {
     }
     
     public init(
-        withPath path: String?,
-        placeholder: WrappedImage? = nil,
-        imageTransformation: WrapperImageViewImageTransformation
-    ) {
-        self.init(
-            withPath: path,
-            placeholder: placeholder,
-            imageTransformation: { image, _ in imageTransformation.closure(image) }
-        )
-    }
-    
-    public init(
         withURL url: URL?,
-        placeholder: WrappedImage? = nil,
-        @ViewBuilder imageTransformation: @escaping (Image, Bool) -> any View
+        placeholder: Bool = false,
+        @ViewBuilder imageTransformation: @escaping (Image) -> any View
     ) {
         self.init(
             withPath: url?.absoluteString,
@@ -40,35 +28,20 @@ public struct RemoteImageView: View {
         )
     }
     
-    public init(
-        withURL url: URL?,
-        placeholder: WrappedImage? = nil,
-        imageTransformation: WrapperImageViewImageTransformation
-    ) {
-        self.init(
-            withURL: url,
-            placeholder: placeholder,
-            imageTransformation: { image, _ in imageTransformation.closure(image) }
-        )
-    }
-    
     public var body: some View {
-        WrapperImageView(currentImage()) { image in
-            imageTransformation(image, isCurrentImagePlaceholder())
-        }
-    }
-    
-    private func currentImage() -> WrappedImage {
-        if let image = imageLoader.image {
-            return .uiImage(image)
-        } else if let placeholder {
-            return placeholder
-        } else {
-            return .none
-        }
-    }
-    
-    private func isCurrentImagePlaceholder() -> Bool {
-        return imageLoader.image == nil
+        VStack(alignment: .center) {
+            if let image = imageLoader.image {
+                AnyView(imageTransformation(Image(uiImage: image)))
+            } else if placeholder {
+                Spacer()
+                Text("Loading...")
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+                    .scaledToFit()
+                    .minimumScaleFactor(0.5)
+                    .padding(8)
+                Spacer()
+            }
+        }.background(.black)
     }
 }
