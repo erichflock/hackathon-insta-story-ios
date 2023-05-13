@@ -9,11 +9,8 @@ public struct InstaStoryPage: View {
     public var body: some View {
         ZStack(alignment: .top) {
             if let chapter = viewModel.getCurrentChapter() {
-                ChapterView(chapter: chapter)
+                ChapterView(chapter: chapter, numberOfChapters: viewModel.chapters.count, index: viewModel.currentChapterIndex, storyTimer: .init(items: 1, interval: 3))
             }
-
-            StoryBarView(chapters: viewModel.chapters)
-                .frame(width: UIScreen.main.bounds.width)
             
             HStack(spacing: 0) {
                 // It's there but not
