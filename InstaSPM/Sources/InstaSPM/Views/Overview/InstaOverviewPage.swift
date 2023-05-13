@@ -53,22 +53,24 @@ public struct InstaOverviewPage: View {
             HStack(spacing: .zero) {
                 ForEach(viewModel.stories, id: \.id) { story in
                     VStack(alignment: .center, spacing: 4) {
-                        AsyncImage(url: URL(string: story.preview)) { image in
-                                   image
-                                       .resizable()
-                                       .aspectRatio(contentMode: .fill)
-                                       .frame(width: 150, height: 150)
-                                       
-                               } placeholder: {
-                                   Color.gray
-                                       .frame(width: 150, height: 150)
-                               }
-                               .clipShape(Circle())
-                               .padding(4)
-                               .overlay(
-                                    Circle()
-                                        .stroke(viewModel.getIsStorySeen(story: story) ? .black : .red, lineWidth: 4)
-                               )
+                        RemoteImageView(
+                            withURL: URL(string: story.preview),
+                            placeholder: .image(Image(systemName: "star"))
+                        ){ image, isPlaceholder in
+                            if isPlaceholder {
+                                Color.gray
+                            } else {
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                            }
+                        }.frame(width: 150, height: 150)
+                        .clipShape(Circle())
+                            .padding(4)
+                            .overlay(
+                                 Circle()
+                                     .stroke(viewModel.getIsStorySeen(story: story) ? .black : .red, lineWidth: 4)
+                            )
                         Text(story.title)
                             .multilineTextAlignment(.center)
                             .lineLimit(2)
