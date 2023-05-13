@@ -1,13 +1,15 @@
 import SwiftUI
 
-public struct InstaStoryPage: View {
-    public init() {}
+struct InstaStoryPage: View {
+    init(viewModel: InstaStoryPageViewModel) {
+        self.viewModel = viewModel
+    }
     
     @State private var isLoading = false
-    @ObservedObject private var viewModel = InstaStoryPageViewModel()
+    @ObservedObject private var viewModel: InstaStoryPageViewModel
     @State private var isLongPressed = false
     
-    public var body: some View {
+    var body: some View {
         ZStack(alignment: .top) {
             if let chapter = viewModel.getCurrentChapter() {
                 ChapterView(isLongPressed: $isLongPressed, chapter: chapter)
@@ -41,27 +43,11 @@ public struct InstaStoryPage: View {
 //                }
 //            )
         }
-        .onAppear {
-            fetchData(NetworkURLs.list10Pics)
-        }
-    }
-    
-    func fetchData(_ urlString: String) {
-        isLoading = true
-        Task {
-            do {
-                let stories = try await Network.fetchStories(urlString)
-                viewModel.chapters = stories[1].chapters
-            } catch {
-                print("Error: \(error)")
-            }
-            isLoading = false
-        }
     }
 }
 
 struct InstaStoryPage_Previews: PreviewProvider {
     static var previews: some View {
-        InstaStoryPage()
+        InstaStoryPage(viewModel: InstaStoryPageViewModel())
     }
 }
