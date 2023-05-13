@@ -102,7 +102,7 @@ public struct InstaOverviewPage: View {
                 let stories = try await Network.fetchStories(urlString)
                 
                 if !stories.isEmpty {
-                    await viewModel.setStoriesAndLoadFirstChapters(stories: stories)
+                    await viewModel.loadPreviewAndFirstChapters(stories: stories)
                 }
                 
                 isLoading = false

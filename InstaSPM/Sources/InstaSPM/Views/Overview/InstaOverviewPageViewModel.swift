@@ -8,10 +8,17 @@ class InstaOverviewPageViewModel: ObservableObject {
         return story.chapters.first?.status == "SEEN"
     }
     
-    func setStoriesAndLoadFirstChapters(stories: [Story]) async {
+    @MainActor func loadPreviewAndFirstChapters(stories: [Story]) async {
         for story in stories {
-            await imageLoader.load(urlString: story.chapters.first?.url)
+            await imageLoader.load(urlString: story.preview)
         }
+        
         self.stories = stories
+        
+        Task {
+            for story in stories {
+                await imageLoader.load(urlString: story.chapters.first?.url)
+            }
+        }
     }
 }
