@@ -1,9 +1,9 @@
 import Foundation
 
 struct NetworkURLs {
-    static let list2Pics = "https://b13f05a4-376f-4dc0-962e-ca4b7bdc2af4.mock.pstmn.io/stories/list"
-    static let list10Pics = "https://b13f05a4-376f-4dc0-962e-ca4b7bdc2af4.mock.pstmn.io/stories/list"
-    static let listVideos = "https://b13f05a4-376f-4dc0-962e-ca4b7bdc2af4.mock.pstmn.io/stories/list"
+    static let list2Pics = "https://dev.whost.ml/stories.list.php"
+    static let list10Pics = "https://dev.whost.ml/stories.list.php"
+    static let listVideos = "https://dev.whost.ml/stories.list.php"
 }
 
 class Network {

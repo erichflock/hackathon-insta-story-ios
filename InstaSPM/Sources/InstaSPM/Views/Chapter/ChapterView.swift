@@ -7,14 +7,11 @@ struct ChapterView: View {
     var numberOfChapters: Int
     var index: Int
     
-    @ObservedObject var storyTimer: StoryTimer
-    
-    public init(isLongPressed: Binding<Bool>, chapter: Chapter, numberOfChapters: Int, index: Int, storyTimer: StoryTimer) {
+    public init(isLongPressed: Binding<Bool>, chapter: Chapter, numberOfChapters: Int, index: Int) {
         self.chapter = chapter
         _isLongPressed = isLongPressed
         self.numberOfChapters = numberOfChapters
         self.index = index
-        self.storyTimer = storyTimer
     }
     
     var body: some View {
@@ -39,14 +36,12 @@ struct ChapterView: View {
             }
             
             StoryBarView(numberOfChapters: numberOfChapters,
-                         currentIndex: index,
-                         storyTimer: storyTimer)
+                         currentIndex: index)
                 .frame(width: UIScreen.main.bounds.width)
             
             Color.black
                 .opacity(!isLongPressed ? 0.0 : 0.1)
         }.background(.black)
-            .onAppear { storyTimer.start() }
     }
 }
 
@@ -62,7 +57,6 @@ struct SwiftUIView_Previews: PreviewProvider {
                                    endAt: 0,
                                    type: .image),
                     numberOfChapters: 0,
-                    index: 0,
-                    storyTimer: .init(items: 0, interval: 0))
+                    index: 0)
     }
 }

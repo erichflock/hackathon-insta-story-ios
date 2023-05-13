@@ -12,7 +12,7 @@ struct InstaStoryPage: View {
     var body: some View {
         ZStack(alignment: .top) {
             if let chapter = viewModel.getCurrentChapter() {
-                ChapterView(isLongPressed: $isLongPressed, chapter: chapter, numberOfChapters: viewModel.chapters.count, index: viewModel.currentChapterIndex, storyTimer: .init(items: 1, interval: 3))
+                ChapterView(isLongPressed: $isLongPressed, chapter: chapter, numberOfChapters: viewModel.chapters.count, index: viewModel.currentChapterIndex)
             }
             
             HStack(spacing: 0) {
