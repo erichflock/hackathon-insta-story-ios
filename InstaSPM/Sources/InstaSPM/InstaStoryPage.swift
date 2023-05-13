@@ -12,11 +12,8 @@ struct InstaStoryPage: View {
     var body: some View {
         ZStack(alignment: .top) {
             if let chapter = viewModel.getCurrentChapter() {
-                ChapterView(isLongPressed: $isLongPressed, chapter: chapter)
+                ChapterView(isLongPressed: $isLongPressed, chapter: chapter, numberOfChapters: viewModel.chapters.count, index: viewModel.currentChapterIndex, storyTimer: .init(items: 1, interval: 3))
             }
-
-            StoryBarView(chapters: viewModel.chapters)
-                .frame(width: UIScreen.main.bounds.width)
             
             HStack(spacing: 0) {
                 // It's there but not
@@ -33,17 +30,15 @@ struct InstaStoryPage: View {
                         viewModel.getNextChapter()
                     }
             }
-            .gesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { value in
-                    isLongPressed = true
-                    print("LongPressGesture tap")
-                }
-                .onEnded { value in
-                    isLongPressed = false
-                    print("LongPressGesture release")
-                }
-            )
+//            .gesture(
+//            DragGesture(minimumDistance: 0)
+//                .onChanged { value in
+//                    isLongPressed = true
+//                }
+//                .onEnded { value in
+//                    isLongPressed = false
+//                }
+//            )
         }
     }
 }

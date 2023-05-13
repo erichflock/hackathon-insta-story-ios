@@ -4,14 +4,21 @@ struct ChapterView: View {
     
     @Binding private var isLongPressed: Bool
     var chapter: Chapter
+    var numberOfChapters: Int
+    var index: Int
     
-    public init(isLongPressed: Binding<Bool>, chapter: Chapter) {
+    @ObservedObject var storyTimer: StoryTimer
+    
+    public init(isLongPressed: Binding<Bool>, chapter: Chapter, numberOfChapters: Int, index: Int, storyTimer: StoryTimer) {
         self.chapter = chapter
         _isLongPressed = isLongPressed
+        self.numberOfChapters = numberOfChapters
+        self.index = index
+        self.storyTimer = storyTimer
     }
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             switch chapter.type {
                 case .image:
                     RemoteImageView(
@@ -34,9 +41,16 @@ struct ChapterView: View {
                 case .soundPic:
                     Text("What the hell!?")
             }
+            
+            StoryBarView(numberOfChapters: numberOfChapters,
+                         currentIndex: index,
+                         storyTimer: storyTimer)
+                .frame(width: UIScreen.main.bounds.width)
+            
             Color.black
-                .opacity(!isLongPressed ? 0.0 : 0.2)
+                .opacity(!isLongPressed ? 0.0 : 0.1)
         }.background(.black)
+            .onAppear { storyTimer.start() }
     }
 }
 
@@ -50,6 +64,9 @@ struct SwiftUIView_Previews: PreviewProvider {
                                    status: "",
                                    startAt: 0,
                                    endAt: 0,
-                                   type: .image))
+                                   type: .image),
+                    numberOfChapters: 0,
+                    index: 0,
+                    storyTimer: .init(items: 0, interval: 0))
     }
 }

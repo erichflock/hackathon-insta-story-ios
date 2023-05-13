@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ChapterBarView: View {
     
-    var progress: CGFloat = 0
+    var progress: CGFloat
     
     var body: some View {
         GeometryReader { geometry in
@@ -22,6 +22,6 @@ struct ChapterBarView: View {
 
 struct ChapterBarView_Previews: PreviewProvider {
     static var previews: some View {
-        ChapterBarView()
+        ChapterBarView(progress: 0)
     }
 }
