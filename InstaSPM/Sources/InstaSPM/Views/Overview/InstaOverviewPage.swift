@@ -55,22 +55,20 @@ public struct InstaOverviewPage: View {
                     VStack(alignment: .center, spacing: 4) {
                         RemoteImageView(
                             withURL: URL(string: story.preview),
-                            placeholder: .image(Image(systemName: "star"))
-                        ){ image, isPlaceholder in
-                            if isPlaceholder {
-                                Color.gray
-                            } else {
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                            }
+                            placeholder: true
+                        ){ image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
                         }.frame(width: 150, height: 150)
+                            .background(.black)
                         .clipShape(Circle())
                             .padding(4)
                             .overlay(
                                  Circle()
                                      .stroke(viewModel.getIsStorySeen(story: story) ? .black : .red, lineWidth: 4)
                             )
+                        
                         Text(story.title)
                             .multilineTextAlignment(.center)
                             .lineLimit(2)

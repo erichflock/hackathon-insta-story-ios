@@ -23,18 +23,14 @@ struct ChapterView: View {
                 case .image:
                     RemoteImageView(
                         withURL: URL(string: chapter.url),
-                        placeholder: .image(Image(systemName: "star"))
-                    ){ image, isPlaceholder in
-                        if isPlaceholder {
-                            Color.black
-                        } else {
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .clipped()
-                                
-                        }
-                    }.ignoresSafeArea(.all)
+                        placeholder: true
+                    ){ image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .clipped()
+//                            .ignoresSafeArea(.all)
+                    }.background(.black)
                        
                 case .video:
                     VideoView(isLongPressed: $isLongPressed, url: chapter.url)
